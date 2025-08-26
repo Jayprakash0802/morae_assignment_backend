@@ -10,7 +10,15 @@ const routes = require('../routes/routes'); // Adjust path if needed
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ['https://morae-assignment.vercel.app', 
+    'https://morae-assignment-git-main-jay-prakashs-projects-49a6d6b0.vercel.app/',
+    'https://morae-assignment-c8dpd52e7-jay-prakashs-projects-49a6d6b0.vercel.app/',
+  ],
+  credentials: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: 'Content-Type,Authorization'
+}));
 app.use(bodyParser.json());
 app.use(express.json());
 
