@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-const routes = require('../routes/routes'); // Adjust path if needed
+const routes = require('./routes/routes'); // Adjust path if needed
 
 const app = express();
 
@@ -22,7 +22,7 @@ app.use(cors({
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
-app.options('*', cors()); // Always after app.use(cors())
+// app.options('*', cors()); // Always after app.use(cors())
 
 
 const mongoURI = process.env.MONGO_URI;
@@ -32,10 +32,7 @@ if (!mongoURI) {
   process.exit(1);
 }
 
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(mongoURI)
 .then(() => console.log('MongoDB connected'))
 .catch((err) => {
   console.error('MongoDB connection error:', err);
@@ -43,5 +40,10 @@ mongoose.connect(mongoURI, {
 });
 
 app.use('/api', routes);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 module.exports = serverless(app);
