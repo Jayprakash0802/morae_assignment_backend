@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.json());
 const mongoURI = process.env.MONGO_URI;
 
-const routes = require('./routes');
+const routes = require('./routes/routes');
 
 app.use(express.json());
 app.use('/api', routes);

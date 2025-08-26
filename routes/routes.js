@@ -3,7 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const JWT_SECRET = process.env.JWT_SECRET;
-const { Task, User } = require('./schema');
+const { Task, User } = require('../schema');
 
 const authMiddleware = async (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1];
